@@ -1,9 +1,10 @@
 import os
+import datetime
 
 from celery import Celery
-from flask import Flask
+from flask import Flask, render_template, request
 
-from database import migrate, db
+from database import migrate, db, Request
 from blueprints import main
 
 config_variable_name = 'FLASK_CONFIG_PATH'
@@ -30,9 +31,24 @@ def create_app(config_file=None, settings_override=None):
 def init_app(app):
     db.init_app(app)
     migrate.init_app(app, db)
+    @app.after_request
+    def after_request(response):
+        r = Request()
+        r.ip_address = request.headers['Host']
+        r.path = request.path
+        r.time = datetime.datetime.now().isoformat()
+        r.user_agent = request.headers['User-Agent']
+        r.status = response.status_code
+        r.method = request.method
+        r.size = response.content_length
+        r.referrer = request.referrer
+        db.session.add(r)
+        db.session.commit()
+        return response
     @app.route('/')
     def index():
-        return "Something"
+        return render_template('home.html')
+
     app.register_blueprint(main.bp)
 
 
