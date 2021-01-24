@@ -9,17 +9,33 @@ migrate = Migrate()
 db = SQLAlchemy()
 
 
-class Document(db.Model):
-    id = Column(Integer(), primary_key=True)
-    data = Column(MutableDict.as_mutable(JSONB), nullable=False)
+class Request(db.Model):
+    __tablename__ = 'requests'
 
-    def __init__(self, data):
-        self.data = data
+    id = db.Column(db.Integer, primary_key=True)
+    ip_address = db.Column(db.String(256), nullable=False)
+    path = db.Column(db.String(256), nullable=False)
+    time = db.Column(db.DateTime)
+    user_agent = db.Column(db.String(256))
+    status = db.Column(db.Integer)
+    method = db.Column(db.String(4))
+    size = db.Column(db.Integer)
+    referrer = db.Column(db.String(256))
 
     def __repr__(self):
-        return u'<Documents %s>'.format(self.id)
+        return u'<Request %s>'.format(self.id)
 
-    def as_dict(self):
-        data = {'id': self.id}
-        data.update(self.data)
-        return data
+
+class DetectionTime(db.Model):
+    __tablename__ = 'detection_times'
+
+    id = db.Column(db.Integer, primary_key=True)
+    host = db.Column(db.String(256), nullable=False)
+    endpoint = db.Column(db.String(256), nullable=False)
+    date = db.Column(db.Time)
+    hour = db.Column(db.Integer)
+    reason = db.Column(db.String(256))
+    ban_expired_at = db.Column(db.DateTime)
+
+    def __repr__(self):
+        return u'<DetectionTimes %s>'.format(self.id)
