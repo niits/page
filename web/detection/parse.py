@@ -6,7 +6,7 @@ import pandas as pd
 def parse_log_file(path):
     data = {
         "host": [],
-        "timestamp": [],
+        "time": [],
         "date": [],
         "hour": [],
         "request": [],
@@ -26,7 +26,7 @@ def parse_log_file(path):
                 date = datetime(parsed_date.year,
                                 parsed_date.month, parsed_date.day)
                 data["host"].append(request['host'])
-                data["timestamp"].append(parsed_date)
+                data["time"].append(parsed_date)
                 data["request"].append(request['request'])
                 data["hour"].append(parsed_date.hour)
                 data["date"].append(date)

@@ -1,5 +1,6 @@
 import os
-import datetime
+from datetime import datetime
+import pytz
 
 from celery import Celery
 from flask import Flask, render_template, request
@@ -36,7 +37,7 @@ def init_app(app):
         r = Request()
         r.ip_address = request.headers['Host']
         r.path = request.path
-        r.time = datetime.datetime.now().isoformat()
+        r.time = datetime.utcnow().replace(tzinfo=pytz.utc).isoformat()
         r.user_agent = request.headers['User-Agent']
         r.status = response.status_code
         r.method = request.method

@@ -31,7 +31,6 @@ class DetectionTime(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     host = db.Column(db.String(256), nullable=False)
-    endpoint = db.Column(db.String(256), nullable=False)
     date = db.Column(db.Time)
     hour = db.Column(db.Integer)
     reason = db.Column(db.String(256))
