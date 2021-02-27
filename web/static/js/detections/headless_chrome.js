@@ -1,5 +1,9 @@
+"use strict";
+
 export default {
-  user_agent: navigator.userAgent.includes("HeadlessChrome"),
-  missing_window_chrome:
-    navigator.userAgent.includes("Chrome") && window.chrome == null,
+  navigator: {
+    user_agent: navigator.userAgent.toLowerCase().includes("headlesschrome"),
+    missing_window_chrome:
+      navigator.userAgent.includes("Chrome") && window.chrome == null,
+  },
 };

@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+  </head>
+  <body>
     <p>Something</p>
     <a href="{{ url_for('main.home') }}">Home</a>
 
-    <button>Click here</button>
-    <div id="target"></div>
+    <button onclick="detect">Click here</button>
+    <div id="target">target</div>
     <script>
-        var hash_id = {{ hash_id }};
+      var hash_id = "{{ hash_id }}";
     </script>
-    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
-</body>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+  </body>
 </html>

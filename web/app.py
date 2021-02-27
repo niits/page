@@ -59,7 +59,16 @@ def init_app(app):
     @app.route('/', methods=['GET', 'POST'])
     def index():
         if request.method == 'POST':
-            app.logger.info('%s', request.data)
+            data = json.loads(request.data)['data']
+            app.logger.info('%s', data['hash_id'])
+
+            r = Request.query.filter_by(hash_id=data['hash_id']).first()
+            if r is None:
+                return None
+            
+            r.fingerprint = json.dumps(data['fingerprint'])
+            app.logger.info('%s', data['detected_by'])
+            db.session.commit()
 
         return render_template('home.html', hash_id=g.hash_id)
 

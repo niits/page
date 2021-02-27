@@ -1,3 +1,5 @@
+"use strict";
+
 export default {
   webdriver: "webdriver" in window,
   __webdriver_script_fn: "__webdriver_script_fn" in document,
@@ -11,7 +13,6 @@ export default {
   document_webdriver:
     document.documentElement.getAttribute("webdriver") !== null,
   document_driver: document.documentElement.getAttribute("driver") !== null,
-  window_document_webdriver: window.document.documentElement.getAttribute(
-    "webdriver"
-  ),
+  window_document_webdriver:
+    window.document.documentElement.getAttribute("webdriver") !== null,
 };

@@ -1,3 +1,5 @@
+"use strict";
+
 import general from "./general.js";
 import phantom from "./phantom.js";
 import puppeteer from "./puppeteer.js";
