@@ -13,6 +13,7 @@ class Request(db.Model):
     __tablename__ = 'requests'
 
     id = db.Column(db.Integer, primary_key=True)
+    hash_id=db.Column(db.String(256), nullable=False)
     ip_address = db.Column(db.String(256), nullable=False)
     path = db.Column(db.String(256), nullable=False)
     time = db.Column(db.DateTime)
@@ -21,6 +22,7 @@ class Request(db.Model):
     method = db.Column(db.String(4))
     size = db.Column(db.Integer)
     referrer = db.Column(db.String(256))
+    fingerprint = db.Column(db.String(2560))
 
     def __repr__(self):
         return u'<Request %s>'.format(self.id)

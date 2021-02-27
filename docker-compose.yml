@@ -18,8 +18,14 @@ services:
       POSTGRES_PASSWORD: abcd1234
       POSTGRES_USER: niits
       POSTGRES_DB: page
+    volumes:
+    - pgdata:/var/lib/postgresql/data
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+
+volumes: 
+  pgdata:
+   driver: local
