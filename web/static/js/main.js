@@ -57,4 +57,10 @@ function checkFingerprint() {
   }
 }
 
-document.load = checkFingerprint();
+if (window.addEventListener) {
+  window.addEventListener("load", checkFingerprint, false);
+} else if (window.attachEvent) {
+  window.attachEvent("onload", checkFingerprint);
+}
+
+document.getElementById("button").onclick = detect;
