@@ -4,7 +4,7 @@ import flatten from "./util.js";
 function sendFingerprint(reasons) {
   var xhr = new XMLHttpRequest();
 
-  xhr.open("POST", "/", true);
+  xhr.open("POST", "", true);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(
     JSON.stringify({
@@ -46,7 +46,7 @@ function checkFingerprint() {
 
   let reasons = Object.entries(flatted)
     .filter(function (entry) {
-      return !entry[1];
+      return entry[1];
     })
     .map(function (item) {
       return item[0];
